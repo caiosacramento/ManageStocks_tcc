@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{%block conteudo %}
+<form class='mt-5' action="" method="post">
+    <p>
+        deseja excluir a ação {{ object}} da sua carteira?
+    </p>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">Excluir Ação</button>
+</form>
+{% endblock %}

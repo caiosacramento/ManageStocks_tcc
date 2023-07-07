@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% include 'parciais/_messages.html' %}
+
+{%block conteudo %}
+<h1 class="mt-3 mb-3"> Seja bem vindo {{ user.first_name }} {{ user.last_name }}</h1>
+<h2>Essas são suas ações:</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Stock id</th>
+        <th>nome</th>
+        <th>preço atual</th>
+        <th>preço comprado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+        <a href="#"> AAPL</a>
+        </td>
+        <td>apple</td>
+        <td>174.07</td>
+        <td>173.07</td>
+    </tr>
+    <tr>
+        <td>
+        <a href="#"> NVDA</a>
+        </td>
+        <td>NVIDIA Corporation</td>
+        <td>280.50</td>
+        <td>280.50</td>
+    </tr>
+    <tr>
+        <td>
+        <a href="#"> TLRY</a>
+        </td>
+        <td>Tilray Brands, Inc.	</td>
+        <td>6.97</td>
+        <td>6.97</td>
+    </tr>
+    </tbody>
+</table>
+{%endblock%}
+<! -- aqui o usuario vai ver as Açoes -->
+
+
+    

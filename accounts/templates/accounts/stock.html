@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block menu %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'index' %}">Manegestocks</a>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'stock' %}">Ações <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Dados</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
+{% block conteudo %}
+<h1 class="mt-3 mb-3"> Cadastre suas Ações:</h1>
+<form method="POST" action="">
+  {% include 'parciais/_mesages.html' %}
+  {% csrf_token %}
+  <div class="form-group">
+    <label >Codigo da ação</label>
+    <input type="text" name='Codigo da ação' class="form-control" value="{{request.POST.nome}}"  placeholder="Digite seu nome">
+  </div>
+  <div class="form-group">
+    <label >Valor Adquirido</label>
+    <input type="text" name='Valor Adquirido' class="form-control" value="{{request.POST.sobrenome}}" placeholder="Digite seu sobrenome">
+  </div>
+  <div class="form-group">
+    <label >data que a ação foi adiquirida</label>
+    <input type="date" name='data' class="form-control" value="{{request.POST.email}}" placeholder="Digite seu email">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Cadastrar Ação</button>
+</form>
+{% endblock %}
+
