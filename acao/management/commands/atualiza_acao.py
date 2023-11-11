@@ -9,11 +9,14 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 mydb = mysql.connector.connect(
-    host = "localhost",
-    user = "root",
+    #host = "localhost",
+    host="managestockufbadatabase.mysql.database.azure.com",
+    #user = "root",
+    user="managestockadm",
     password  = "Caio12345",
     database = "databasemanagestocks",
-    auth_plugin='mysql_native_password'
+    auth_plugin='mysql_native_password',
+    port=3306
 )
 
 dataAtual = date.today()
@@ -50,7 +53,7 @@ class Command(BaseCommand):
                     lista_email = []
                     lista_email.append(c.usuario.email)
                     subject = f'Atenção para desvalorização da sua ação {c.acao.nome}'
-                    message = f'Olá,{c.usuario.first_name}. Sua ação {c.acao.nome} comprada a {c.valor_comprado} está sendo vendida a {c.acao.valor_atual} a teve uma valorização de {c.variacao_calculada}'  
+                    message = f'Olá,{c.usuario.first_name}. Sua ação {c.acao.nome} comprada a {c.valor_comprado} está sendo vendida a {c.acao.valor_atual} a teve uma valorização de {c.variacao_calculada}%'  
                     from_email = settings.DEFAULT_FROM_EMAIL
                     recipient_list = lista_email
                     send_mail(subject, message, from_email, recipient_list)
@@ -59,7 +62,7 @@ class Command(BaseCommand):
                     lista_email = []
                     lista_email.append(c.usuario.email)
                     subject = f'Atenção para valorização da sua ação {c.acao.nome}'
-                    message = f'Olá,{c.usuario.first_name}. Sua ação {c.acao.nome} comprada a {c.valor_comprado} está sendo vendida a {c.acao.valor_atual} a teve uma valorização de {c.variacao_calculada}'
+                    message = f'Olá,{c.usuario.first_name}. Sua ação {c.acao.nome} comprada a {c.valor_comprado} está sendo vendida a {c.acao.valor_atual} a teve uma valorização de {c.variacao_calculada}%'
                     from_email = settings.DEFAULT_FROM_EMAIL
                     recipient_list = lista_email
                     send_mail(subject, message, from_email, recipient_list)

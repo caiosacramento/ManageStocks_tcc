@@ -10,3 +10,19 @@
     <button type="submit" class="btn btn-danger">Excluir Ação</button>
 </form>
 {% endblock %}
+
+{%block footer %}
+  <footer class="mt-auto navbar-fixed-bottom fixed-bottom">
+    <div class="container-fluid bg-light text-center p-3">
+      <div class="row">
+          <div class="col-md-4 mx-auto text-center">
+                  <span class="lead">Universidade Federal da Bahia</span><br>
+                  <span>Desenvolvido por Caio Sacramento dos Santos</span>
+              </p>
+          </div>
+      </div>
+    {% block scripts %}
+      
+    {%endblock%}
+  </footer>
+  {%endblock%}

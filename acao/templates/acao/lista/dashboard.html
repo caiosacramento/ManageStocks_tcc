@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-<h1 class='mt-5'>Bem vindo, {{ request.user}}.</h3>
-<h4>essas são as ações na sua carteira:</h4>
+<h1 class='mt-5'>Bem vindo, {{ request.user}}</h3>
+<h4>Essas são as ações na sua carteira:</h4>
 <a href="{% url 'wallet' %}" class="btn btn-primary btn-sm">Adicionar Ação</a>
 <hr>
 <div class="table responsive">
     <table class="table table-striped">
         <tr>
             <th>Ação</th>
+            <th>Quantidade</th>
             <th>Valor comprada</th>
             <th>Valor atual</th>
             <th>Data comprada</th>
@@ -20,6 +21,7 @@
         {% for campo in object_list %}
         <tr>
             <td>{{campo.acao.nome}}</td>
+            <td>{{campo.qtd_acao}}</td>
             <td>U$ {{campo.valor_comprado}}</td>
             <td>U$ {{campo.acao.valor_atual}}</td>
             <td>{{campo.data}}</td>
@@ -30,7 +32,7 @@
             {% endif %}
             <td>{{campo.variacao_limite}}%</td>
             <td>
-                <a href="{% url 'wallet-edita' campo.pk %}" class="btn btn-warning btn-sm" title="Excluir"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="{% url 'wallet-edita' campo.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                 <a href="{% url 'wallet-delete' campo.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
             </td>
         </tr>
@@ -40,8 +42,38 @@
         </tr>
         {% endfor %}
     </table>
+    <ul class="pagination justify-content-center">
+    
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primeira</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+        {% endif %}
+    
+        <li class="page-item">
+            <span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</span>
+        </li>
+    
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a></li>
+        {% endif %}
+    
+    </ul>
 </div>
 {% endblock %}
+
+{%block footer %}
+  <footer class="mt-auto navbar-fixed-bottom fixed-bottom ">
+    <div class="container-fluid bg-light text-center p-3">
+      <div class="row">
+          <div class="col-md-4 mx-auto text-center">
+              <p>
+                  <span class="lead">Universidade Federal da Bahia</span><br>
+                  <span>Desenvolvido por Caio Sacramento dos Santos</span>
+              </p>
+          </div>      
+      </div>
+{%endblock%}
 
 {% block scripts %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">

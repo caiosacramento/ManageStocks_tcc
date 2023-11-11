@@ -12,5 +12,25 @@
       <button type="submit" class="btn btn-primary">Entrar</button>
 </form>
 </div>
+{%block footer %}
+  <footer class="mt-auto navbar-fixed-bottom fixed-bottom">
+    <div class="container-fluid bg-light text-center p-3">
+      <div class="row">
+          <div class="col-md-4 mx-auto text-center">
+              <p>
+                  <span class="lead">Universidade Federal da Bahia</span><br>
+                  <span>Desenvolvido por Caio Sacramento dos Santos</span>
+              </p>
+          </div>      
+      </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{%static 'vendor/jquery/jquery.slim.min.js'%}"></script>
+    <script src="{%static 'vendor/jquery/jquery-3.7.0.min.js'%}"></script>
+    <script src="{%static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
+    {% block scripts %}
+      
+    {%endblock%}
+  </footer>
+  {%endblock%}
 {% endblock %}

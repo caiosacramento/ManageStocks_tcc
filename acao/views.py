@@ -14,7 +14,7 @@ class CarteiraCreate(LoginRequiredMixin,CreateView):
     login_url = reverse_lazy('login')
     model = CarteiraAcao
     template_name = 'acao/form.html'
-    fields = ['acao','valor_comprado', 'variacao_limite' , 'data']
+    fields = ['acao','qtd_acao','valor_comprado', 'variacao_limite' , 'data']
     success_url = reverse_lazy('wallet-lista')
     
     def form_valid(self, form):
@@ -28,7 +28,7 @@ class CarteiraCreate(LoginRequiredMixin,CreateView):
 class CarteiraUpdate(LoginRequiredMixin,UpdateView):
     login_url = reverse_lazy('login')
     model = CarteiraAcao
-    fields = ['acao','valor_comprado','variacao_limite','data']
+    fields = ['acao','qtd_acao','valor_comprado','variacao_limite','data']
     template_name = 'acao/form.html'
     success_url = reverse_lazy('wallet-lista')
 
@@ -52,6 +52,7 @@ class CarteiraLista(LoginRequiredMixin,ListView):
     login_url = reverse_lazy('login')
     model = CarteiraAcao
     template_name = 'acao/lista/dashboard.html'
+    paginate_by = 5
     
     def send_email(self,recipient,subject,body):
         if self.variacao_limite >= CarteiraAcao.variacao_calculada :

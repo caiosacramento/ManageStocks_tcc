@@ -17,10 +17,11 @@ class Acao(models.Model): #acao da bolsa, preço atualizado diariamente
 
 class CarteiraAcao(models.Model) : #acao cliente, preço historico comparado com o preço atual
     acao = models.ForeignKey(Acao, on_delete=models.PROTECT)
+    qtd_acao = models.IntegerField(verbose_name="quantidade de ação",default=1)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     valor_comprado = models.IntegerField(verbose_name="valor comprado",default=0)
     data = models.DateField()  
-    variacao_calculada = models.FloatField(verbose_name="variação", blank=True, null=True)
+    variacao_calculada = models.FloatField(verbose_name="variação", blank=True, null=True,)
     variacao_limite = models.FloatField(verbose_name="variação", blank=True, null=True)
 
     def save(self, *args, **kwargs):

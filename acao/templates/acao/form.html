@@ -6,11 +6,15 @@
 {%block conteudo %}
 <form action="" method="post">
   <h1 class="mt-3 mb-3">Cadastre uma ação:</h1>
+  <p class="lead">Preencha todos os campos obrigatórios.</p>
+  <hr>
     {% csrf_token %}
     {{ form|crispy }}
     <button type="submit" class="btn btn-primary">Cadastrar Ação</button>
 </form>
 {% endblock %}
+
+
 
 {% block scripts %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">

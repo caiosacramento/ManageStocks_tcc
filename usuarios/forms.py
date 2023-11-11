@@ -16,3 +16,14 @@ class UsuarioForm(UserCreationForm):
         if User.objects.filter(email=email_digitado).exists():
             raise ValidationError("O email {} já está em uso.".format(email_digitado))
         return email_digitado
+    
+class UsuarioUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['email']
+    
+    def clean_email(self):
+        email_digitado = self.cleaned_data['email']
+        if User.objects.filter(email=email_digitado).exists():
+            raise ValidationError("O email {} já está em uso.".format(email_digitado))
+        return email_digitado

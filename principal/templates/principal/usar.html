@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block conteudo%}
+    <h1 class="mt-5">Castrando uma Ação na carteira:</h1>
+    <hr>
+    <p>Após se cadastrar e entrar na sua conta você verá o dashboard da sua carteira de ações, você pode adicionar uma nova ação clicando em "Adicionar Ação":</p>
+    <img src="{%static 'vendor/img/adicionar.png'%}">
+    <p>na tela de cadastrar ações você verá as opções:</p>
+    <li>Ação</li>
+    <ul>Escolha uma ação da lista</ul>    
+    <li>Valor Comprado</li>
+    <ul>Digite qual o valor em U$ que você comprou a ação</ul>
+    <li>Variação</li>
+    <ul>Digite a variação maxima que a ação não pode ultrapassar. Ex: variação = 10, eu quero ser avisado se minha ação variar mais de 10%</ul>
+    <li>Data</li>
+    <ul>Data em que ação foi comprada</ul>
+    <img src="{%static 'vendor/img/form.png'%}">
+    <p>Após defenir os valores é só clicar em "Cadastrar Ação" e você será redirecionado para o dashboard</p>
+
+    <h1 class="mt-5">Visualização do dashboard:</h1>
+    <hr>
+    <p>Após se cadastrar e entrar na sua conta você verá o dashboard da sua carteira de ações, você pode adicionar uma nova ação clicando em "Adicionar Ação":</p>
+    <img>
+    <p>Campos do Dashboard:</p>
+    <li>Ação</li>
+    <ul>Nome da ação</ul>    
+    <li>Valor Comprada</li>
+    <ul>Valor em que ação foi comprada</ul>
+    <li>Valor atual</li>
+    <ul>Valor atual da ação</ul>
+    <li>Data comprada</li>
+    <ul>Data que a ação foi comprada</ul>
+    <li>Variação</li>
+    <ul>Variação atual da ação entre o preço comprado e o preço atual</ul>
+    <li>Variação limite</li>
+    <ul>Quanto a ação pode variar antes do sistema avisar o usuário</ul>
+    <li>Opções</li>
+    <ul>botão amarelo: editar informações</ul>
+    <ul>botão vermelho: excluir ação </ul>
+    <img src="{%static 'vendor/img/dashboard.png'%}">
+{%endblock%}

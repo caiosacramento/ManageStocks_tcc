@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&8e6-7f!ehj65t=ddwg^)41*nu_va8msh-#xl^6ylq+a(e^lq1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['managestockufba.azurewebsites.net']
-
+ALLOWED_HOSTS = ['*','managestockufba.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['*','managestockufba.azurewebsites.net','https://managestockufba.azurewebsites.net','20.206.176.5']
 
 # Application definition
 
@@ -54,11 +54,11 @@ INSTALLED_APPS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    #'whitenoise.middleware.WthiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -90,16 +90,25 @@ WSGI_APPLICATION = 'managestocks.wsgi.application'
 
 DATABASES = {
     #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
     #}
     'default': {
+        #'ENGINE': 'django.db.backends.mysql',
         'ENGINE': 'django.db.backends.mysql',
+        #'NAME': 'databasemanagestocks',
         'NAME': 'databasemanagestocks',
-        'USER': 'root',
+        #'USER': 'root',
+        'USER': 'managestockadm',
+        #'PASSWORD': 'Caio12345',
         'PASSWORD': 'Caio12345',
-        'HOST':'', 
-        'PORT':'',
+        #'HOST':'', 
+        'HOST':'managestockufbadatabase.mysql.database.azure.com', 
+        #'PORT':'',
+        'PORT':'3306',
+        'OPTIONS': {
+            'ssl': {'required': True}
+        }
     }
 }
 
@@ -138,12 +147,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-#STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'templates/static')
-]
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATICFILES_DIRS = [
+   #os.path.join(BASE_DIR, 'templates/static')
+#]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
