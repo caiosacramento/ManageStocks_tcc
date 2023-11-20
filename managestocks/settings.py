@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-&8e6-7f!ehj65t=ddwg^)41*nu_va8msh-#xl^6ylq+a(e^lq1
 DEBUG = True
 
 ALLOWED_HOSTS = ['*','managestockufba.azurewebsites.net']
-CSRF_TRUSTED_ORIGINS = ['*','managestockufba.azurewebsites.net','https://managestockufba.azurewebsites.net','20.206.176.5']
+CSRF_TRUSTED_ORIGINS = ['https://managestockufba.azurewebsites.net']
 
 # Application definition
 
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'django_crontab',
     'yahoofinancials',
-    'pandas'
+    'pandas',
 ]
 
 # crispy forms

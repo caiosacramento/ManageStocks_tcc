@@ -25,7 +25,7 @@ class CarteiraAcao(models.Model) : #acao cliente, preço historico comparado com
     variacao_limite = models.FloatField(verbose_name="variação", blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        self.variacao_calculada = self.acao.valor_atual / self.valor_comprado 
+        self.variacao_calculada = (self.acao.valor_atual - self.valor_comprado)/self.valor_comprado * 100
         super().save(*args, **kwargs)
 
     def envia_email(self):

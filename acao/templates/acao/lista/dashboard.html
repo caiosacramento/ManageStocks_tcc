@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-<h1 class='mt-5'>Bem vindo, {{ request.user}}</h3>
+<h1 class='mt-5'>Bem-vindo, {{ request.user}}</h3>
 <h4>Essas são as ações na sua carteira:</h4>
 <a href="{% url 'wallet' %}" class="btn btn-primary btn-sm">Adicionar Ação</a>
 <hr>
@@ -9,10 +9,10 @@
         <tr>
             <th>Ação</th>
             <th>Quantidade</th>
-            <th>Valor comprada</th>
+            <th>Valor comprado</th>
             <th>Valor atual</th>
-            <th>Data comprada</th>
-            <th>Variação</th>
+            <th>Data comprada</th>  
+            <th>Variação atual</th>
             <th>Variação limite</th>
             <th>Opções</th>
 

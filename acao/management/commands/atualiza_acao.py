@@ -41,11 +41,14 @@ class Command(BaseCommand):
 
         for c in carteiras: #só falta testar se o commit, após isso é só fazer a função de enviar o email
             id = c.id
-            nova_variacao = c.acao.valor_atual / c.valor_comprado
+            nova_variacao = ((c.acao.valor_atual - c.valor_comprado)/ c.valor_comprado) * 100
             variacaoConstrutor = "UPDATE acao_carteiraacao SET variacao_calculada = %s where id = %s "
             variacaoValores = (nova_variacao, id)
             my_cursor.execute(variacaoConstrutor,variacaoValores)
             mydb.commit() 
+            montante_antigo = c.valor_comprado * c.qtd_acao
+            montante_atual = c.acao.valor_atual * c.qtd_acao
+            montante_total = montante_atual - montante_antigo 
             if c.variacao_calculada >= c.variacao_limite:
                 if c.valor_comprado >= c.acao.valor_atual:
                     # ação desvalorizando
@@ -53,7 +56,7 @@ class Command(BaseCommand):
                     lista_email = []
                     lista_email.append(c.usuario.email)
                     subject = f'Atenção para desvalorização da sua ação {c.acao.nome}'
-                    message = f'Olá,{c.usuario.first_name}. Sua ação {c.acao.nome} comprada a {c.valor_comprado} está sendo vendida a {c.acao.valor_atual} a teve uma valorização de {c.variacao_calculada}%'  
+                    message = f'Olá, {c.usuario.first_name}. Sua ação {c.acao.nome} comprada a U${c.valor_comprado} está sendo vendida a U${c.acao.valor_atual} a teve uma desvalorização de {nova_variacao}%, com essa desvalorização você perdeu U${montante_total}'  
                     from_email = settings.DEFAULT_FROM_EMAIL
                     recipient_list = lista_email
                     send_mail(subject, message, from_email, recipient_list)
@@ -62,7 +65,7 @@ class Command(BaseCommand):
                     lista_email = []
                     lista_email.append(c.usuario.email)
                     subject = f'Atenção para valorização da sua ação {c.acao.nome}'
-                    message = f'Olá,{c.usuario.first_name}. Sua ação {c.acao.nome} comprada a {c.valor_comprado} está sendo vendida a {c.acao.valor_atual} a teve uma valorização de {c.variacao_calculada}%'
+                    message = f'Olá, {c.usuario.first_name}. Sua ação {c.acao.nome} comprada a U${c.valor_comprado} está sendo vendida a U${c.acao.valor_atual} a teve uma valorização de {nova_variacao}%, com essa valorização você ganhou U${montante_total} '
                     from_email = settings.DEFAULT_FROM_EMAIL
                     recipient_list = lista_email
                     send_mail(subject, message, from_email, recipient_list)
